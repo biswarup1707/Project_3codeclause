@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CodeClause Online Code Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #D27685;
+        }
+
+        .header {
+            background-color: #0A4D68;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .container {
+            margin: 20px;
+            background-color: #643A6B;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .toolbar {
+            padding: 10px;
+            background-color: #643A6B;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .editor {
+            width: 100%;
+            height: 300px;
+            background-color: #FFDCB6;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        .output {
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #FFDCB6;
+        }
+
+        .footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .select {
+            display: inline-block;
+            position: relative;
+            font-size: 14px;
+            font-weight: 400;
+            margin-left: 10px;
+        }
+
+        .select::before {
+            content: '\25BC';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .select select {
+            appearance: none;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            padding: 4px;
+            font-size: 14px;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #007BFF;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069D9;
+        }
+
+        .btn-secondary {
+            background-color: #6C757D;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5A6268;
+        }
+
+        .btn-danger {
+            background-color: #DC3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #C82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Sparks Logo" height="80px">
+        <h1>CodeClause Online Code Editor</h1>
+    </div>
+    <div class="container">
+        <div class="toolbar">
+            <button id="btnRun"
+            class="btn btn-primary">Run</button>
+            <button id="btnSave" class="btn btn-secondary">Save</button>
+            <button id="btnReset" class="btn btn-danger">Reset</button>
+            <select id="themeSelect" class="select">
+            <option value="light">Light Theme</option>
+            <option value="dark">Dark Theme</option>
+            </select>
+            <select id="languageSelect" class="select">
+                <option value="javascript">JavaScript</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="cpp">C++</option>
+                </select>
+                </div>
+                <textarea id="codeEditor" class="editor"></textarea>
+                <div id="outputArea" class="output"></div>
+                </div>
+                <div class="footer"></div>
+
+                <script>
+                    const codeEditor = document.getElementById('codeEditor');
+                    const outputArea = document.getElementById('outputArea');
+                    const btnRun = document.getElementById('btnRun');
+                    const btnSave = document.getElementById('btnSave');
+                    const btnReset = document.getElementById('btnReset');
+                    const themeSelect = document.getElementById('themeSelect');
+                    const languageSelect = document.getElementById('languageSelect');
+                
+                    // Initialize editor with default language and theme
+                    let editor = CodeMirror.fromTextArea(codeEditor, {
+                        lineNumbers: true,
+                        mode: 'javascript',
+                        theme: 'default',
+                        autofocus: true
+                    });
+                
+                    // Event listener for run button
+                    btnRun.addEventListener('click', () => {
+                        const code = editor.getValue();
+                        // Execute the code and display the output
+                        const output = executeCode(code);
+                        updateOutput(output);
+                    });
+                
+                    // Event listener for save button
+                    btnSave.addEventListener('click', () => {
+                        const code = editor.getValue();
+                        // Save the code to a file or perform other save operations
+                        alert('Code saved!');
+                    });
+                
+                    // Event listener for reset button
+                    btnReset.addEventListener('click', () => {
+                        editor.setValue('');
+                        outputArea.textContent = '';
+                    });
+                
+                    // Event listener for theme selection
+                    themeSelect.addEventListener('change', () => {
+                        const selectedTheme = themeSelect.value;
+                        editor.setOption("theme", selectedTheme);
+                    });
+                
+                    // Function to execute the code
+                    function executeCode(code) {
+                        // Execute the code here and return the output
+                        // This is just a placeholder function
+                        return "Output: Hello, World!";
+                    }
+                
+                    // Function to update the output area
+                    function updateOutput(output) {
+                        outputArea.textContent = output;
+                    }
+                </script>
+            </body>
+            </html>                
